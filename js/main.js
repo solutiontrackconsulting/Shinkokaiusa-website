@@ -4,6 +4,7 @@
 
 document.addEventListener('DOMContentLoaded', () => {
   initNav();
+  initHeroAnimation();
   initScrollReveal();
   initContactForm();
   setActiveNav();
@@ -16,7 +17,7 @@ function initNav() {
   const isHome = document.body.classList.contains('page-home');
 
   function updateNavBg() {
-    if (!isHome || window.scrollY > 20) {
+    if (!isHome || window.scrollY > 60) {
       header.classList.add('has-bg');
     } else {
       header.classList.remove('has-bg');
@@ -84,10 +85,29 @@ function initScrollReveal() {
         }
       });
     },
-    { threshold: 0.1, rootMargin: '0px 0px -32px 0px' }
+    { threshold: 0.15, rootMargin: '0px 0px -40px 0px' }
   );
 
   els.forEach(el => observer.observe(el));
+}
+
+function initHeroAnimation() {
+  if (!document.body.classList.contains('page-home')) return;
+
+  const targets = [
+    { sel: '.hero__h1',      delay: 100 },
+    { sel: '.hero__h1-ja',   delay: 250 },
+    { sel: '.hero__sub',     delay: 400 },
+    { sel: '.hero__sub-ja',  delay: 550 },
+    { sel: '.hero__actions', delay: 700 },
+  ];
+
+  targets.forEach(({ sel, delay }) => {
+    const el = document.querySelector(sel);
+    if (!el) return;
+    el.classList.add('hero-load');
+    setTimeout(() => el.classList.add('in'), delay);
+  });
 }
 
 function initContactForm() {
