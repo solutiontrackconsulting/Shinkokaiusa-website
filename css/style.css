@@ -1106,6 +1106,106 @@ p { max-width: 65ch; }
 
 .program-card__link:hover { opacity: 0.7; }
 
+/* === Other Services (services hub page) ================== */
+.other-services {
+  padding-block: var(--section-v);
+  background: var(--surface-alt);
+}
+
+.other-services__header {
+  margin-bottom: clamp(36px, 5vw, 56px);
+}
+
+.other-services__header h2 {
+  font-size: clamp(1.4rem, 2.5vw, 1.9rem);
+  margin-bottom: 6px;
+}
+
+.other-service-list {
+  border-top: 1px solid var(--border);
+}
+
+.other-service {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(28px, 5vw, 48px);
+  padding-block: 44px;
+  border-bottom: 1px solid var(--border);
+}
+
+.other-service__title {
+  font-family: var(--font-serif);
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.other-service__title-ja {
+  font-size: 0.87rem;
+  color: var(--text-mid);
+  margin-bottom: 14px;
+}
+
+.other-service__audience {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+  max-width: 44ch;
+}
+
+.other-service__audience-ja {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin-bottom: 14px;
+  max-width: 42ch;
+}
+
+.other-service__price {
+  display: inline-block;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--crimson);
+  margin-top: 14px;
+}
+
+.other-service__list-label {
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+}
+
+.other-service__list {
+  margin-bottom: 12px;
+}
+
+.other-service__list li {
+  position: relative;
+  padding-left: 18px;
+  font-size: 0.92rem;
+  color: var(--text-mid);
+  margin-bottom: 8px;
+}
+
+.other-service__list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.6em;
+  width: 6px;
+  height: 6px;
+  background: var(--crimson);
+  opacity: 0.5;
+}
+
+.other-service__list-ja li {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.8;
+}
+
 /* === Scroll Reveal ======================================= */
 .reveal {
   opacity: 0;
@@ -1169,6 +1269,11 @@ p { max-width: 65ch; }
 
   .service-grid {
     grid-template-columns: 1fr;
+  }
+
+  .other-service {
+    grid-template-columns: 1fr;
+    gap: 20px;
   }
 
   .about-section__inner {
