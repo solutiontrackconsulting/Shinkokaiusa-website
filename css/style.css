@@ -443,6 +443,46 @@ p { max-width: 65ch; }
   margin-bottom: 36px;
 }
 
+/* Site motto / verse — placeholder, home hero only. See HTML comment
+   above the markup in index.html before swapping the text. */
+.site-motto {
+  margin: 4px 0 32px;
+  padding-left: 20px;
+  border-left: 2px solid var(--crimson);
+  max-width: 44ch;
+}
+
+.site-motto__en {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 500;
+  font-size: clamp(1.05rem, 1.8vw, 1.25rem);
+  line-height: 1.5;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+
+.site-motto__ja {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 0.92rem;
+  line-height: 1.75;
+  color: var(--text-mid);
+  margin-bottom: 10px;
+  max-width: none;
+}
+
+.site-motto__ref {
+  display: block;
+  font-family: var(--font-sans);
+  font-style: normal;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--crimson);
+}
+
 .hero__actions {
   display: flex;
   flex-direction: column;
