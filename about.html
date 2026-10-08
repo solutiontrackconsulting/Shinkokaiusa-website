@@ -3,14 +3,42 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About Us — Shinkokai USA</title>
+  <title>About Us | Shinkokai USA</title>
   <meta name="description" content="Learn about Shinkokai USA's mission to help seniors and their families navigate care, medical access, and life transitions between the United States and Japan. A subsidiary of Shinkoufukushikai.">
+  <!-- Open Graph. og:image asset is PENDING: add images/og-image.png (see images/README.md).
+       Switch og:image to an absolute URL once the shinkokaiusa.org domain is connected. -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="About Us | Shinkokai USA">
+  <meta property="og:description" content="Learn about Shinkokai USA's mission to help seniors and their families navigate care, medical access, and life transitions between the United States and Japan. A subsidiary of Shinkoufukushikai.">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="ja_JP">
+  <meta property="og:image" content="images/og-image.png">
+  <!-- Icons: assets PENDING (images/favicon.svg, images/apple-touch-icon.png). -->
+  <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
+  <!-- Structured data (JSON-LD). No absolute URLs until the custom domain is connected. -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Shinkokai USA",
+    "alternateName": "シンコウカイUSA",
+    "description": "Shinkokai USA is the US subsidiary of Shinkoufukushikai, offering advisory and consultation services that help seniors and their families navigate care, medical access, and life transitions between the United States and Japan.",
+    "email": "info@shinkokaiusa.org",
+    "parentOrganization": {
+      "@type": "Organization",
+      "name": "Shinkoufukushikai",
+      "alternateName": "伸こう福祉会"
+    }
+  }
+  </script>
 </head>
 <body>
+  <a class="skip-link" href="#main">Skip to main content <span lang="ja">（本文へ移動）</span></a>
 
   <!-- Navigation -->
   <header class="site-header has-bg" id="site-header" role="banner">
@@ -58,7 +86,7 @@
     </nav>
   </header>
 
-  <main>
+  <main id="main" tabindex="-1">
 
     <!-- Page Banner -->
     <section class="page-banner reveal" aria-label="About Shinkokai USA">
@@ -102,7 +130,7 @@
             <span class="label">APPROACH<br><span lang="ja" style="letter-spacing:0.04em;">アプローチ</span></span>
           </div>
           <div class="about-section__body">
-            <p>We work closely with seniors and their families to understand the full picture: care needs, health goals, family circumstances, and personal wishes. From there, we match them with the right program, whether that's a short medical tourism visit, a guided trial stay, ongoing senior living support, or full return-to-Japan advisory. We help families make informed decisions and navigate every step with confidence.</p>
+            <p>We work closely with seniors and their families to understand the full picture: care needs, health goals, family circumstances, and personal wishes. From there, we recommend the program that fits best, whether that's a short medical tourism visit, a guided trial stay, ongoing senior living support, or full return-to-Japan advisory. We help families make informed decisions and navigate every step with confidence.</p>
             <p class="lang-ja" lang="ja">「私たちは、高齢者ご本人やそのご家族と緊密に連携し、介護ニーズ、健康上の目標、家族の状況、ご本人の希望を丁寧に把握した上で、医療観光での短期渡航、体験滞在、日本での継続的なシニアライフ支援、本帰国アドバイザリーなど、最適なプログラムをご提案します。ご家族が自信を持って一歩を踏み出せるよう、すべてのステップをサポートします。」</p>
             <a href="services.html" class="btn btn--outline" style="margin-top:12px;">See our services and programs</a>
           </div>

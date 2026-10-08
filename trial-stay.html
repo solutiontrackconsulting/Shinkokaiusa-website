@@ -3,14 +3,50 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Senior Trial Stay Program — Shinkokai USA</title>
+  <title>Senior Trial Stay Program | Shinkokai USA</title>
   <meta name="description" content="Shinkokai USA's Senior Trial Stay Program: a 10-day guided trial residency in Japan that lets you experience senior housing, care facilities, and daily life before making a long-term commitment. Program coordination fee $5,500–$10,000.">
+  <!-- Open Graph. og:image asset is PENDING: add images/og-image.png (see images/README.md).
+       Switch og:image to an absolute URL once the shinkokaiusa.org domain is connected. -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Senior Trial Stay Program | Shinkokai USA">
+  <meta property="og:description" content="Shinkokai USA's Senior Trial Stay Program: a 10-day guided trial residency in Japan that lets you experience senior housing, care facilities, and daily life before making a long-term commitment. Program coordination fee $5,500–$10,000.">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="ja_JP">
+  <meta property="og:image" content="images/og-image.png">
+  <!-- Icons: assets PENDING (images/favicon.svg, images/apple-touch-icon.png). -->
+  <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
+  <!-- Structured data (JSON-LD). No absolute URLs until the custom domain is connected. -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "Senior Trial Stay Program",
+    "description": "Shinkokai USA's Senior Trial Stay Program: a 10-day guided trial residency in Japan that lets you experience senior housing, care facilities, and daily life before making a long-term commitment. Program coordination fee $5,500–$10,000.",
+    "provider": {
+      "@type": "Organization",
+      "name": "Shinkokai USA",
+      "alternateName": "シンコウカイUSA",
+      "email": "info@shinkokaiusa.org"
+    },
+    "offers": {
+      "@type": "Offer",
+      "priceSpecification": {
+        "@type": "PriceSpecification",
+        "minPrice": 5500,
+        "maxPrice": 10000,
+        "priceCurrency": "USD"
+      }
+    }
+  }
+  </script>
 </head>
 <body>
+  <a class="skip-link" href="#main">Skip to main content <span lang="ja">（本文へ移動）</span></a>
 
   <!-- Navigation -->
   <header class="site-header has-bg" id="site-header" role="banner">
@@ -58,7 +94,7 @@
     </nav>
   </header>
 
-  <main>
+  <main id="main" tabindex="-1">
 
     <!-- Page Banner -->
     <section class="page-banner reveal" aria-label="Senior Trial Stay Program">
@@ -125,10 +161,10 @@
           <li class="step reveal reveal-d1">
             <span class="step__num" aria-hidden="true">02</span>
             <div class="step__body">
-              <h3 class="step__title">Needs Assessment &amp; Facility Matching</h3>
-              <p class="step__title-ja" lang="ja">ニーズ評価・施設選定</p>
-              <p class="step__desc">Based on the senior's care needs and preferences, we research suitable trial stay options in Japan, which may include senior housing communities, care facility short stays, or supported independent living environments. We present our findings and help the family make an informed selection.</p>
-              <p class="step__desc-ja lang-ja" lang="ja">「介護ニーズとご希望をもとに、日本でのトライアル滞在の選択肢を調査・選定します。シニア住宅、介護施設の短期入所、サポート付き自立生活環境などから、最適なオプションをご提案します。」</p>
+              <h3 class="step__title">Facility Research &amp; Options Guidance</h3>
+              <p class="step__title-ja" lang="ja">施設の調査・選択肢のご案内</p>
+              <p class="step__desc">Based on the senior's care needs and preferences, we research trial stay options in Japan, which may include senior housing communities, care facility short stays, or supported independent living environments. We share what we find and walk the family through the options so they can make an informed choice.</p>
+              <p class="step__desc-ja lang-ja" lang="ja">「介護ニーズとご希望をもとに、日本でのトライアル滞在の選択肢を調査します。シニア住宅、介護施設の短期入所、サポート付き自立生活環境などの選択肢をご案内し、ご家族が納得して選べるようサポートします。」</p>
             </div>
           </li>
 

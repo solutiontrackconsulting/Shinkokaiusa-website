@@ -1,131 +1,62 @@
-# Shinkokai USA — Website
+# Shinkokai USA website
 
-Bilingual (English + Japanese) marketing website for Shinkokai USA, a senior care return-to-Japan coordination service.
+Bilingual (English and Japanese) website for Shinkokai USA, the US subsidiary of
+Shinkoufukushikai (伸こう福祉会), a Japanese social welfare organization. Shinkoufukushikai
+is the parent company, not a partner.
 
-**Domain:** shinkokaiusa.org  
-**Stack:** Plain HTML, CSS, JavaScript — no build step required  
-**Deploy target:** GitHub Pages
+Shinkokai USA is an **advisory and consultation service**. It helps seniors and their
+families navigate care, medical access, and life transitions between the United States and
+Japan. It does not deliver medical care, place people in facilities, provide job placement,
+or guarantee outcomes.
 
----
+- **Domain:** shinkokaiusa.org (never the .com, which belongs to an unrelated organization)
+- **Stack:** plain HTML, CSS, and JavaScript. No framework, build step, or libraries.
+- **Hosting:** GitHub Pages, from `main`, root folder
 
-## File Structure
+## What's on the site
 
-```
-/
-├── index.html          Home
-├── about.html          About Us
-├── services.html       Our Services
-├── contact.html        Contact / Schedule a Consultation
-├── css/
-│   └── style.css       Shared stylesheet
-├── js/
-│   └── main.js         Nav, scroll reveal, form handling
-├── PRODUCT.md          Strategic brand context (for impeccable skill)
-├── DESIGN.md           Visual system documentation
-└── README.md
-```
+| Page | Content | Fee (USD) |
+|---|---|---|
+| `return-to-japan.html` | Return to Japan Advisory | $2,500 to $5,000 |
+| `medical-tourism.html` | Medical Tourism Japan (10 days) | $5,500 to $15,000 |
+| `trial-stay.html` | Senior Trial Stay Program (10 days) | $5,500 to $10,000 |
+| `senior-living.html` | Senior Living in Japan | $1,500 to $4,000 |
 
----
+`services.html` is the hub. It links the four programs and holds the additional services:
+International Senior Concierge ($150/hr), Japan Caregiver Certification Program
+($3,000 to $5,000), English Support for Foreign Residents in Japan ($150/hr), and
+Webinars ($49 to $99 per session).
 
-## Deploying to GitHub Pages
+Other pages: `index.html`, `about.html`, `pricing.html`, `contact.html`, `404.html`.
+Shared code lives in `css/style.css` and `js/main.js`.
 
-### 1. Create a GitHub repository
+## Project docs
 
-1. Go to [github.com](https://github.com) and create a new repository named `shinkokaiusa-website` (or any name you prefer).
-2. Set it to **Public** (required for free GitHub Pages).
+- `CLAUDE.md`: standing rules (copy, pricing, structure). Read before any change.
+- `PRODUCT.md` and `DESIGN.md`: audience, brand, and visual system.
+- `REVIEW_NEEDED.md`: Japanese strings awaiting native-speaker review.
+- `images/README.md`: icon and social image files still to be added.
 
-### 2. Push the site files
+## Before launch
 
-```bash
-git init
-git add .
-git commit -m "Initial site build"
-git branch -M main
-git remote add origin https://github.com/YOUR-USERNAME/shinkokaiusa-website.git
-git push -u origin main
-```
+- Replace `YOUR_FORM_ID` in the contact form's Formspree URL (`contact.html`).
+- Add the pending images listed in `images/README.md`, and switch `og:image` to an
+  absolute URL once the custom domain is connected.
+- Replace the `placehold.co` photos with real images in `images/`.
+- Swap in the final motto verse on `index.html` if the family chooses a different one
+  (see the comment above the `site-motto` block).
 
-### 3. Enable GitHub Pages
+## Custom domain
 
-1. In the repository on GitHub, go to **Settings > Pages**.
-2. Under **Source**, select **Deploy from a branch**.
-3. Set branch to `main`, folder to `/ (root)`.
-4. Click **Save**.
+In the repo's **Settings > Pages**, set the custom domain to `shinkokaiusa.org` and enable
+HTTPS. At the registrar, point `@` to GitHub Pages' four A records (185.199.108.153,
+185.199.109.153, 185.199.110.153, 185.199.111.153) and add a `www` CNAME to
+`solutiontrackconsulting.github.io`.
 
-GitHub will publish the site at `https://YOUR-USERNAME.github.io/shinkokaiusa-website/`.
-
-### 4. Add a custom domain (shinkokaiusa.org)
-
-1. In **Settings > Pages > Custom domain**, enter `shinkokaiusa.org` and click Save.
-2. GitHub will create a `CNAME` file in your repository automatically. Do not delete it.
-
----
-
-## Connecting Namecheap DNS to GitHub Pages
-
-Log into your Namecheap account and navigate to **Domain List > Manage > Advanced DNS** for `shinkokaiusa.org`.
-
-### Remove any existing A records for `@`, then add these four:
-
-| Type | Host | Value | TTL |
-|------|------|-------|-----|
-| A Record | @ | 185.199.108.153 | Automatic |
-| A Record | @ | 185.199.109.153 | Automatic |
-| A Record | @ | 185.199.110.153 | Automatic |
-| A Record | @ | 185.199.111.153 | Automatic |
-
-### Add a CNAME record for www:
-
-| Type | Host | Value | TTL |
-|------|------|-------|-----|
-| CNAME Record | www | YOUR-USERNAME.github.io | Automatic |
-
-DNS propagation typically takes 15–60 minutes. Once propagated, GitHub Pages will automatically provision an SSL certificate via Let's Encrypt.
-
-### Verify HTTPS
-
-After propagation, return to **Settings > Pages** and check **Enforce HTTPS** to ensure all traffic is redirected to the secure version.
-
----
-
-## Swapping in Real Photos
-
-All images currently use `https://placehold.co/` placeholder URLs. To replace them:
-
-1. Add your photo files to an `images/` directory in the project root.
-2. Find each `<img src="https://placehold.co/...">` tag in the HTML files.
-3. Replace the `src` with the relative path, e.g. `src="images/hero-family.jpg"`.
-4. Update the `alt` attribute with a description of the actual photo.
-
-Recommended image sizes:
-- Hero (index.html): 900×700px minimum
-- About section image: 800×380px minimum
-- Services intro image: 600×400px minimum
-
----
-
-## Adding Calendly Scheduling
-
-When ready, replace the placeholder note in `contact.html` with the Calendly embed widget:
-
-```html
-<!-- Replace the .contact-info__note div with: -->
-<div class="calendly-inline-widget" data-url="https://calendly.com/YOUR-LINK" style="min-width:280px;height:400px;"></div>
-<script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
-```
-
----
-
-## Local Development
-
-No build step required. Open any HTML file directly in a browser, or run a simple local server:
+## Local preview
 
 ```bash
-# Python 3
 python -m http.server 8000
-
-# Node.js (npx)
-npx serve .
 ```
 
-Then visit `http://localhost:8000`.
+Then open `http://localhost:8000`.

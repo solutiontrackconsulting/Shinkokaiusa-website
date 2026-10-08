@@ -162,12 +162,16 @@ function initScrollReveal() {
 function initHeroAnimation() {
   if (!document.body.classList.contains('page-home')) return;
 
+  // Reduced motion: leave everything visible, no staggered fade-in.
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
   const targets = [
     { sel: '.hero__h1',      delay: 100 },
     { sel: '.hero__h1-ja',   delay: 250 },
     { sel: '.hero__sub',     delay: 400 },
     { sel: '.hero__sub-ja',  delay: 550 },
-    { sel: '.hero__actions', delay: 700 },
+    { sel: '.site-motto',    delay: 700 },
+    { sel: '.hero__actions', delay: 850 },
   ];
 
   targets.forEach(({ sel, delay }) => {
@@ -178,18 +182,121 @@ function initHeroAnimation() {
   });
 }
 
+/* Contact form: validate, then submit to Formspree via fetch.
+   FORMSPREE PLACEHOLDER: the endpoint comes from the form's action attribute
+   in contact.html (https://formspree.io/f/YOUR_FORM_ID). Replace YOUR_FORM_ID
+   with the real form ID before launch; until then every submit will fail and
+   show the error banner. */
 function initContactForm() {
   const form = document.getElementById('contact-form');
   if (!form) return;
 
   const success = document.getElementById('form-success');
+  const failure = document.getElementById('form-error');
+  const submitBtn = form.querySelector('button[type="submit"]');
+  const submitLabel = submitBtn.innerHTML;
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  form.addEventListener('submit', e => {
+  const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
+  // [English, Japanese] pairs for each required field.
+  const MESSAGES = {
+    name:         { required: ['Please enter your name.', 'お名前を入力してください。'] },
+    email:        { required: ['Please enter your email address.', 'メールアドレスを入力してください。'],
+                    invalid:  ['Please enter a valid email address.', '正しい形式のメールアドレスを入力してください。'] },
+    language:     { required: ['Please select a preferred language.', 'ご希望の言語を選択してください。'] },
+    relationship: { required: ['Please select your relationship to the senior.', 'ご関係を選択してください。'] },
+    message:      { required: ['Please enter a message.', 'メッセージを入力してください。'] },
+  };
+
+  const fields = Object.keys(MESSAGES).map(name => form.elements[name]);
+
+  function errorFor(field) {
+    const value = field.value.trim();
+    const msgs = MESSAGES[field.name];
+    if (!value) return msgs.required;
+    if (field.name === 'email' && !EMAIL_RE.test(value)) return msgs.invalid;
+    return null;
+  }
+
+  function renderError(field, msg) {
+    const el = document.getElementById(field.id + '-error');
+    if (!msg) {
+      el.hidden = true;
+      el.textContent = '';
+      field.removeAttribute('aria-invalid');
+      return;
+    }
+    const en = document.createElement('span');
+    en.textContent = msg[0];
+    const ja = document.createElement('span');
+    ja.className = 'form-error__ja';
+    ja.lang = 'ja';
+    ja.textContent = msg[1];
+    el.replaceChildren(en, ja);
+    el.hidden = false;
+    field.setAttribute('aria-invalid', 'true');
+  }
+
+  // Returns the first invalid field, or null when everything passes.
+  function validateAll() {
+    let firstInvalid = null;
+    fields.forEach(field => {
+      const msg = errorFor(field);
+      renderError(field, msg);
+      if (msg && !firstInvalid) firstInvalid = field;
+    });
+    return firstInvalid;
+  }
+
+  // Once a field has been flagged, clear or update its error as the visitor fixes it.
+  fields.forEach(field => {
+    const evt = field.tagName === 'SELECT' ? 'change' : 'input';
+    field.addEventListener(evt, () => {
+      if (field.getAttribute('aria-invalid') === 'true') renderError(field, errorFor(field));
+    });
+  });
+
+  function setSending(isSending) {
+    submitBtn.disabled = isSending;
+    if (isSending) {
+      submitBtn.setAttribute('aria-busy', 'true');
+      submitBtn.innerHTML = 'Sending&hellip; &nbsp;<span lang="ja" style="font-weight:400;opacity:0.85;">「送信中」</span>';
+    } else {
+      submitBtn.removeAttribute('aria-busy');
+      submitBtn.innerHTML = submitLabel;
+    }
+  }
+
+  form.addEventListener('submit', async e => {
     e.preventDefault();
-    form.style.display = 'none';
-    if (success) {
+    if (submitBtn.disabled) return;
+    failure.hidden = true;
+
+    const firstInvalid = validateAll();
+    if (firstInvalid) {
+      firstInvalid.focus();
+      return;
+    }
+
+    setSending(true);
+    try {
+      const response = await fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { Accept: 'application/json' },
+      });
+      if (!response.ok) throw new Error('Form submission failed: ' + response.status);
+
+      form.hidden = true;
       success.classList.add('visible');
-      success.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      success.focus({ preventScroll: true });
+      success.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'center' });
+    } catch (err) {
+      setSending(false);
+      failure.hidden = false;
+      failure.focus({ preventScroll: true });
+      failure.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'center' });
     }
   });
 }

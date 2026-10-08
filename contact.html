@@ -3,14 +3,26 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Schedule a Consultation — Shinkokai USA</title>
+  <title>Schedule a Consultation | Shinkokai USA</title>
   <meta name="description" content="Schedule a free, no-obligation consultation with Shinkokai USA in English or Japanese. We'll respond within one business day.">
+  <!-- Open Graph. og:image asset is PENDING: add images/og-image.png (see images/README.md).
+       Switch og:image to an absolute URL once the shinkokaiusa.org domain is connected. -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Schedule a Consultation | Shinkokai USA">
+  <meta property="og:description" content="Schedule a free, no-obligation consultation with Shinkokai USA in English or Japanese. We'll respond within one business day.">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="ja_JP">
+  <meta property="og:image" content="images/og-image.png">
+  <!-- Icons: assets PENDING (images/favicon.svg, images/apple-touch-icon.png). -->
+  <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+  <a class="skip-link" href="#main">Skip to main content <span lang="ja">（本文へ移動）</span></a>
 
   <!-- Navigation -->
   <header class="site-header has-bg" id="site-header" role="banner">
@@ -58,7 +70,7 @@
     </nav>
   </header>
 
-  <main>
+  <main id="main" tabindex="-1">
 
     <!-- Page Banner -->
     <section class="page-banner reveal" aria-label="Schedule a consultation">
@@ -106,13 +118,28 @@
           <!-- Right: Form -->
           <div>
 
-            <div id="form-success" class="form-success" role="alert" aria-live="polite">
+            <div id="form-success" class="form-success" role="status" aria-live="polite" tabindex="-1">
               <h3>Thank you for reaching out.</h3>
               <p>We have received your message and will be in touch within one business day.</p>
               <p class="lang-ja" style="margin-top:8px;" lang="ja">「ご連絡ありがとうございます。1営業日以内にご返信いたします。」</p>
             </div>
 
-            <form id="contact-form" action="#" method="post" novalidate aria-label="Consultation request form">
+            <div id="form-error" class="form-error-banner" role="alert" tabindex="-1" hidden>
+              <p>Sorry, your message could not be sent. Please try again, or email us directly at <a href="mailto:info@shinkokaiusa.org">info@shinkokaiusa.org</a>.</p>
+              <p class="form-error-banner__ja" lang="ja">「申し訳ございません。メッセージを送信できませんでした。もう一度お試しいただくか、<a href="mailto:info@shinkokaiusa.org">info@shinkokaiusa.org</a> まで直接メールでご連絡ください。」</p>
+            </div>
+
+            <!-- FORMSPREE PLACEHOLDER: replace YOUR_FORM_ID with the real Formspree
+                 form ID before launch. Until then, submissions will fail and show the
+                 error message above. (Also noted in js/main.js, initContactForm.) -->
+            <form id="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="post" novalidate aria-label="Consultation request form">
+
+              <input type="hidden" name="_subject" value="New consultation request (shinkokaiusa.org)">
+              <!-- Spam honeypot: hidden from people, ignored by Formspree if left empty. -->
+              <div class="form-honeypot" aria-hidden="true">
+                <label for="website">Leave this field empty</label>
+                <input type="text" id="website" name="_gotcha" tabindex="-1" autocomplete="off">
+              </div>
 
               <div class="form-group">
                 <label class="form-label" for="name">Full Name</label>
@@ -124,8 +151,10 @@
                   name="name"
                   autocomplete="name"
                   required
+                  aria-describedby="name-error"
                   placeholder="Your full name"
                 >
+                <p class="form-error" id="name-error" hidden></p>
               </div>
 
               <div class="form-group">
@@ -138,8 +167,10 @@
                   name="email"
                   autocomplete="email"
                   required
+                  aria-describedby="email-error"
                   placeholder="you@example.com"
                 >
+                <p class="form-error" id="email-error" hidden></p>
               </div>
 
               <div class="form-group">
@@ -161,24 +192,26 @@
               <div class="form-group">
                 <label class="form-label" for="language">Preferred Language</label>
                 <span class="form-label-ja" lang="ja">ご希望の言語</span>
-                <select class="form-select" id="language" name="language" required>
+                <select class="form-select" id="language" name="language" required aria-describedby="language-error">
                   <option value="" disabled selected>Select a language</option>
                   <option value="en">English</option>
                   <option value="ja">日本語</option>
                   <option value="both">Both / どちらでも</option>
                 </select>
+                <p class="form-error" id="language-error" hidden></p>
               </div>
 
               <div class="form-group">
                 <label class="form-label" for="relationship">Relationship to Senior</label>
                 <span class="form-label-ja" lang="ja">ご関係</span>
-                <select class="form-select" id="relationship" name="relationship" required>
+                <select class="form-select" id="relationship" name="relationship" required aria-describedby="relationship-error">
                   <option value="" disabled selected>Select your relationship</option>
                   <option value="self">I am the senior</option>
                   <option value="child">Adult child</option>
                   <option value="family">Other family member</option>
                   <option value="other">Other</option>
                 </select>
+                <p class="form-error" id="relationship-error" hidden></p>
               </div>
 
               <div class="form-group">
@@ -188,8 +221,11 @@
                   class="form-textarea"
                   id="message"
                   name="message"
+                  required
+                  aria-describedby="message-error"
                   placeholder="Please share a brief description of your situation, timeline, or any questions you have."
                 ></textarea>
+                <p class="form-error" id="message-error" hidden></p>
               </div>
 
               <div class="form-submit-row">

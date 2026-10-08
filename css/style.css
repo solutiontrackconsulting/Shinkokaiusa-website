@@ -61,6 +61,31 @@ button { font-family: inherit; cursor: pointer; background: none; border: none; 
   outline-offset: 3px;
 }
 
+/* Skip link: visually hidden until it receives keyboard focus */
+.skip-link {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 1000;
+  padding: 10px 18px;
+  background: var(--crimson);
+  color: var(--surface);
+  font-size: 0.88rem;
+  font-weight: 500;
+  transform: translateY(-200%);
+}
+
+.skip-link:focus,
+.skip-link:focus-visible {
+  transform: translateY(0);
+  outline: 2px solid var(--text);
+  outline-offset: 2px;
+}
+
+main:focus {
+  outline: none;
+}
+
 /* === Layout ============================================== */
 .container {
   max-width: var(--max-w);
@@ -370,6 +395,27 @@ p { max-width: 65ch; }
   color: var(--text-muted);
   margin-top: 6px;
   max-width: 56ch;
+}
+
+/* === 404 page ============================================ */
+.not-found {
+  min-height: 60vh;
+  padding-bottom: clamp(64px, 9vw, 112px);
+}
+
+.not-found__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 36px;
+}
+
+.not-found__ja {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 400;
+  opacity: 0.85;
+  margin-top: 2px;
 }
 
 /* === Hero (home) ========================================= */
@@ -947,6 +993,72 @@ p { max-width: 65ch; }
   color: var(--text-mid);
   max-width: 44ch;
   margin-inline: auto;
+}
+
+.form-success:focus,
+.form-error-banner:focus {
+  outline: none;
+}
+
+/* Inline field errors (bilingual, filled in by js/main.js) */
+.form-error {
+  margin-top: 6px;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: var(--crimson);
+  max-width: none;
+}
+
+.form-error__ja {
+  display: block;
+  font-size: 0.75rem;
+  margin-top: 2px;
+}
+
+.form-input[aria-invalid="true"],
+.form-select[aria-invalid="true"],
+.form-textarea[aria-invalid="true"] {
+  border-color: var(--crimson);
+  box-shadow: inset 0 0 0 1px var(--crimson);
+}
+
+/* Shown when the submission itself fails */
+.form-error-banner {
+  margin-bottom: 24px;
+  padding: 18px 20px;
+  background: var(--crimson-tint);
+  border: 1px solid oklch(87% 0.06 29);
+  font-size: 0.88rem;
+  color: var(--text);
+}
+
+.form-error-banner p {
+  max-width: none;
+}
+
+.form-error-banner__ja {
+  margin-top: 6px;
+  font-size: 0.8rem;
+  line-height: 1.8;
+  color: var(--text-mid);
+}
+
+.form-error-banner a {
+  color: var(--crimson);
+  border-bottom: 1px solid currentColor;
+}
+
+.form-submit-row .btn:disabled {
+  opacity: 0.65;
+  cursor: wait;
+}
+
+.form-honeypot {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
 }
 
 /* === Footer ============================================== */
