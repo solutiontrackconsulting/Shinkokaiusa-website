@@ -6,7 +6,7 @@ Read this before every task. Also consult PRODUCT.md and DESIGN.md before any co
 Shinkokai USA is a U.S. subsidiary of Shinkoufukushikai (伸こう福祉会), a Japanese social welfare organization. It helps seniors and their families navigate care, medical access, and life transitions between the United States and Japan.
 
 ## Non-negotiable copy rules
-- **Advisory and consultation only.** Shinkokai USA does not deliver medical care, place people in facilities, provide job placement, or guarantee outcomes. Use language like guidance, options, research, referrals, and coordination with partner institutions. Never "facility matching," "placement," or "we provide care."
+- **Advisory and consultation only.** Shinkokai USA does not deliver medical care, place people in facilities, provide job placement, or guarantee outcomes. Use language like guidance, options, research, referrals, and coordination with medical institutions and facilities in Japan. Never "facility matching," "placement," or "we provide care." Do not describe any relationship as a partnership unless it is confirmed.
 - **Parent company, not partner.** Shinkoufukushikai is always the parent company (subsidiary relationship). Never call it a partner.
 - **Bilingual pairs.** Every English paragraph has a paired Japanese paragraph marked `lang="ja"`. When English changes, update its Japanese pair to match. Flag any Japanese you are unsure about for native review instead of guessing.
 - **No em dashes** in any visible copy, English or Japanese. Vary punctuation instead (periods, colons, commas, parentheses).
